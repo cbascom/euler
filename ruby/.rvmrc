@@ -1,0 +1,12 @@
+rvm ruby-1.9.3-p327-turbo@symphony --patch falcon --create --install
+
+if ! command -v bundle ; then
+  gem install bundler --no-ri --no-rdoc
+fi
+
+# Install production gems ONLY when ENV is production
+if [[ "$ENV" == "production" ]]; then
+  bundle install --without development test
+else
+  bundle install
+fi
